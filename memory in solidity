@@ -1,0 +1,17 @@
+6 TYPES OF MEMORY
+STACK
+MEMORY 
+STORAGE
+CALLDATA
+CODE LOGS
+
+data location can only be specified for array, struct or mapping types in function parameters
+string is array of bytes so we have to specify with strings 
+
+//calldata is temporary variable that can't be  modified
+//memory is temporary variable that can be modified
+//storage is permanent variable that can be modified
+
+
+// we cant say variable is stack code or log
+
