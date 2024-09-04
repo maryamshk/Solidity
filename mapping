@@ -1,0 +1,16 @@
+MAPPING
+set of keys where each key returning a value
+its like a dictionary
+
+// dictionary where every name is maped to favnumber
+// first entity datatype second entity datatype visibility name
+ mapping(string => uint256) public nameToFavoriteNumber;
+
+function addPerson(uint256 _favouriteNumber, string memory _name) public{
+    nameToFavoriteNumber[_name]=_favouriteNumber;
+}
+
+
+
+
+
