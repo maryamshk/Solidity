@@ -1,0 +1,69 @@
+//file storageFactory.sol
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
+
+import "./SimpleStorage.sol";
+
+// contract deploying another contract
+contract StorageFactory{
+    SimpleStorage[] public simpleStorageArray;
+    function createSimpleStorageContract() public{
+        // When you deploy that contract using new SimpleStorage(), you create an instance, 
+        // which is a specific deployed version of that contract, with its own unique state 
+        // and address on the blockchain.
+        SimpleStorage simpleStorage=new SimpleStorage();
+        simpleStorageArray.push(simpleStorage);
+
+        // new keyword is how solidity knows were gonna deploy new simplestoragecontract 
+}
+
+
+// ------------------interacting with contract----------------------------------------
+// to use fn from simple storage here we first need simple storage object
+// array is keeping track of addresses here
+
+function sfStore(uint256 _simpleStorageIndex, uint256 simpleStorageNumber) public{
+    // we are accessing fn from different contract through indexing since we have stored contract in array
+    SimpleStorage simpleStorage=simpleStorageArray[_simpleStorageIndex];
+    simpleStorage.store(simpleStorageNumber);
+    }
+
+
+
+// function to read number we saved in above function
+function sfGet(uint256 _simpleStorageIndex) view public returns(uint256){
+    SimpleStorage simpleStorage=simpleStorageArray[_simpleStorageIndex];
+    return simpleStorage.retrieve();
+    // retrieve to get that number we just saved
+} 
+
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+
+//inheritance
+//file extraStorage.sol
+
+
+// SPDX-License-Identifier:MIT
+
+pragma solidity ^0.8.26;
+
+import "./SimpleStorage.sol";
+
+// we are creating child contract of storage simpleStorage contract will will inherit all of its fn and var etc
+// inheritance
+contract ExtraStorage is SimpleStorage{
+// if we want to use store fn of simpleStorage but modify it a little like add a 5 to 
+// fav Number. We would have to use override keyword to tell solidity we gonna override this function
+// in order to override we have to use virtual keyword 
+
+function store(uint256 _favouriteNumber) public override{
+    favoriteNumber=_favouriteNumber+5;
+
+}
+ 
+}
