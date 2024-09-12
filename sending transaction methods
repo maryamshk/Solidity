@@ -1,0 +1,23 @@
+
+// 3 ways to send transactions from the contract
+// transfer
+// send 
+// call
+
+//TRANSFER  
+// msg.sender is of address type where as payable(msg.sender) is of payable address type through which we can send native blockchain currency
+payable(msg.sender).transfer(address(this).balance);  //this refers to this contract
+
+
+//SEND
+bool sendSuccess=payable(msg.sender).send(address(this).balance);
+require(sendSuccess, "send failed");
+
+
+//CALL
+// whatever data this fn returns would be set to dataReturned 
+// if fn successfully called callSuccess will be true otherwise false
+//here not calling any fn, we are treating this as transaction
+(bool callSuccess, )=payable(msg.sender).call{value:address(this).balance}("");
+require(callSuccess, "call failed");
+}
